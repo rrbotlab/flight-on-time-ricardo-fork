@@ -16,8 +16,8 @@ Testamos diversos algoritmos de Boosting, priorizando a métrica de **Recall** (
 | :--- | :--- | :--- | :--- | :--- |
 | v1.0 | **Random Forest** | Bagging Ensemble | 87.0% | Descontinuado |
 | v2.0 | **XGBoost** | Gradient Boosting | 87.2% | Testado |
-| v3.0 | **CatBoost** | Categorical Boosting | 89.4% | MPV |
-| **v3.0** | **CatBoost + SafeEncoder** | **Anti-Leakage Pipeline** | **88.9% ** | **Em Produção (Hardening)** |
+| v3.0.1 | **CatBoost** | Categorical Boosting | 89.4% | MPV |
+| **v3.0** | **CatBoost + SafeEncoder** | **Anti-Leakage Pipeline** | **88.9** | **Em Produção (Hardening)** |
 
 **Por que CatBoost?**
 O algoritmo da Yandex demonstrou superioridade ao lidar com as variáveis categóricas complexas (rotas e companhias aéreas), permitindo atingir quase **90% de detecção de atrasos** sem sacrificar a performance da API.
