@@ -1,6 +1,6 @@
 # FlightOnTime - Motor de Inteligência Artificial
 
-> **Status:** Em Produção (v4.1.0-Native) | **Recall de Segurança:** 90.8%
+>> **Status:** 🚀 Em Produção (v4.2.0-SmartDistance) | **Recall de Segurança:** 90.7%
 
 Este repositório contém o **Core de Data Science** do projeto FlightOnTime. Nossa missão é prever atrasos em voos comerciais no Brasil utilizando Machine Learning avançado enriquecido com dados meteorológicos, focando na segurança e planejamento do passageiro.
 
@@ -18,7 +18,8 @@ Evoluímos de um modelo puramente histórico para uma arquitetura híbrida que c
 | v2.0 | XGBoost | Gradient Boosting | 87.2% | Testado |
 | v3.0 | CatBoost | Histórico Puro | 89.4% | Legacy (MVP) |
 | v4.0 | CatBoost + OpenMeteo | Weather-Aware Pipeline | 86.0% | Testado |
-| **v4.1** | **CatBoost Native** | **Weather-Aware + Native Features** | **90.8%** | **Em Produção** |
+| v4.1 | CatBoost Native | Weather-Aware + Native Features | 90.8% | Estável |
+| **v4.2** | **CatBoost + GeoMaps** | **Smart Distance Calculation** | **90.7%** | **Em Produção** |
 
 *Nota: Com a implementação do CatBoost Native na v4.1, superamos a performance do modelo Legacy (v3.0), unindo a robustez climática com a precisão histórica.*
 
@@ -49,6 +50,7 @@ O modelo v4.1 é um sistema híbrido que cruza histórico com condições físic
 2. **Detector de Feriados:** Cruzamento em tempo real da data do voo com o calendário oficial.
 3. **Georreferenciamento:** Cálculo da distância geodésica (`distancia_km`) via Fórmula de Haversine.
 4. **CatBoost Native Support:** Removemos encoders manuais e passamos a usar o tratamento nativo de categorias do algoritmo, aumentando a precisão em rotas complexas.
+5.  **Smart Distance (v4.2):** O modelo agora "conhece" as coordenadas dos aeroportos. Se o usuário não informar a distância (`distancia_km`), o sistema calcula automaticamente a geodésica entre origem e destino.
 
 ### Stack Tecnológico
 
@@ -113,13 +115,13 @@ A API aceita dados do voo e, opcionalmente, dados de clima.
   "origem": "Congonhas",
   "destino": "Santos Dumont",
   "data_partida": "2025-11-20T08:00:00",
-  "distancia_km": 366.0,
+  "distancia_km": null,  // Opcional na v4.2 (Calculado automaticamente)
   "precipitation": 25.0,
   "wind_speed": 45.0
 }
 ```
 
-*Nota: Se `precipitation` ou `wind_speed` não forem enviados, a API assume 0 (Bom tempo).*
+*Nota: Se `precipitation` ou `wind_speed` não forem enviados, a API assume 0 (Bom tempo). Se distancia_km for omitido, a API calcula automaticamente baseada nas coordenadas dos aeroportos. Se precipitation ou wind_speed não forem enviados, assume-se 0 (Bom tempo).*
 
 **Resposta da API (Exemplo de Tempestade):**
 ```json
@@ -130,7 +132,7 @@ A API aceita dados do voo e, opcionalmente, dados de clima.
   "cor": "red",
   "clima": "Chuva: 25.0mm",
   "metadados_modelo": {
-    "versao": "4.1.0-Native",
+    "versao": "4.2.0-SmartDistance",
     "threshold_aplicado": 0.35
   }
 }
