@@ -1,12 +1,12 @@
-# ✈️ FlightOnTime - Motor de Inteligência Artificial
+#  FlightOnTime - Motor de Inteligência Artificial
 
-> **Status:** 🚀 Em Produção (v5.0.0-LiveWeather) | **Recall de Segurança:** 90.7%
+> **Status:**  Em Produção (v5.0.0-LiveWeather) | **Recall de Segurança:** 90.8%
 
 Este repositório contém o **Core de Data Science** do projeto FlightOnTime. Nossa missão é prever atrasos em voos comerciais no Brasil utilizando Machine Learning avançado enriquecido com dados meteorológicos em tempo real, focando na segurança e planejamento do passageiro.
 
 ---
 
-## 📈 A Evolução do Modelo (Do MVP ao Live-Weather)
+##  A Evolução do Modelo (Do MVP ao Live-Weather)
 
 Nosso maior desafio foi lidar com o **desbalanceamento severo** dos dados (apenas 11% dos voos atrasam) e a complexidade de fatores externos.
 
@@ -26,7 +26,7 @@ Evoluímos de um modelo puramente histórico para uma arquitetura autônoma que 
 
 ---
 
-## 🧠 Decisões Estratégicas de Negócio
+##  Decisões Estratégicas de Negócio
 
 ### 1. Otimização do Limiar de Decisão (Threshold)
 
@@ -43,7 +43,7 @@ Realizamos uma análise matemática utilizando o **F2-Score** (que prioriza o Re
 
 ---
 
-## 🛠️ Arquitetura e Engenharia de Features
+##  Arquitetura e Engenharia de Features
 
 O modelo v5.0 é um sistema autônomo que cruza histórico com dados vivos:
 
@@ -65,7 +65,7 @@ O modelo v5.0 é um sistema autônomo que cruza histórico com dados vivos:
 
 ---
 
-## 🚦 Regra de Negócio: O Semáforo de Risco
+##  Regra de Negócio: O Semáforo de Risco
 
 Traduzimos a probabilidade matemática em uma experiência visual para o usuário:
 
@@ -78,7 +78,7 @@ Traduzimos a probabilidade matemática em uma experiência visual para o usuári
 
 ---
 
-## 💻 Instalação e Execução
+##  Instalação e Execução
 
 ### 1. Preparar o Ambiente
 ```bash
@@ -105,7 +105,7 @@ Acesse a documentação automática em: http://127.0.0.1:8000/docs
 
 ---
 
-## 📡 Documentação da API
+##  Documentação da API
 
 A API aceita dados do voo e busca automaticamente o clima se necessário.
 
@@ -140,7 +140,7 @@ A API aceita dados do voo e busca automaticamente o clima se necessário.
 
 ---
 
-## 🗺️ Roadmap Estratégico (Fase 3)
+##  Roadmap Estratégico (Fase 3)
 
 Com a entrega da v5.0 (Live Weather), o sistema está completo em termos de previsão física. O próximo passo é o tráfego aéreo.
 
@@ -157,7 +157,7 @@ Com a entrega da v5.0 (Live Weather), o sistema está completo em termos de prev
 
 ---
 
-## 📊 Dataset
+##  Dataset
 
 **Fonte Oficial:** Flights in Brazil (2015-2017) - Kaggle  
 **Dados Climáticos:** Enriquecimento realizado via Open-Meteo Historical API.

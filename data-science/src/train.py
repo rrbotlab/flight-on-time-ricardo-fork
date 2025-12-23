@@ -9,19 +9,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import recall_score
 
 # --- CONFIGURAÇÃO ---
-print("🚀 Iniciando Treinamento V4.2 (Smart Distance)...")
+print(" Iniciando Treinamento V5 (Live Wheather)...")
 current_dir = os.path.dirname(__file__)
 data_path = os.path.join(current_dir, '../data/raw/BrFlights_Enriched_v4.csv')
 model_path = os.path.join(current_dir, 'flight_classifier_v4.joblib')
 
 if not os.path.exists(data_path):
-    print(f"❌ Erro: Dataset não encontrado em {data_path}")
+    print(f" Erro: Dataset não encontrado em {data_path}")
     exit()
     
 df = pd.read_csv(data_path, low_memory=False)
 
 # --- 1. EXTRAÇÃO DE COORDENADAS (O SEGREDO) ---
-print("🗺️  Mapeando coordenadas dos aeroportos...")
+print("  Mapeando coordenadas dos aeroportos...")
 # Criamos um dicionário { 'GRU': {'lat': -23..., 'lon': -46...}, ... }
 coords_dict = {}
 # Agrupamos por origem para pegar lat/long únicas
@@ -41,7 +41,7 @@ for _, row in aeroportos_dest.iterrows():
         }
 
 # --- 2. PREPARAÇÃO (Igual à v4.1) ---
-print("🛠️  Preparando dados...")
+print("  Preparando dados...")
 for col in ['precipitation', 'wind_speed']:
     df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
@@ -82,7 +82,7 @@ X = df[features]
 y = df['target']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
 
-print("🧠 Treinando CatBoost...")
+print(" Treinando CatBoost...")
 model_final = CatBoostClassifier(
     iterations=500, learning_rate=0.1, depth=6, auto_class_weights='Balanced',
     cat_features=cat_features, verbose=False, allow_writing_files=False
@@ -90,14 +90,14 @@ model_final = CatBoostClassifier(
 model_final.fit(X, y) # Treino Full para produção
 
 # --- 3. EXPORTAÇÃO COM COORDENADAS ---
-print("📦 Empacotando modelo e mapas...")
+print(" Empacotando modelo e mapas...")
 artifact = {
     'model': model_final,
     'features': features,
     'cat_features': cat_features,
     # AQUI ESTÁ A MÁGICA: Salvamos o dicionário de coordenadas junto com o modelo
     'airport_coords': coords_dict, 
-    'metadata': {'versao': '4.2-AutoDistance', 'threshold': 0.35}
+    'metadata': {'versao': '5.0-LiveWeather', 'threshold': 0.35}
 }
 
 joblib.dump(artifact, model_path)
