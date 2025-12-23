@@ -3,15 +3,26 @@ import joblib
 import pandas as pd
 import numpy as np
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware  # <--- IMPORTANTE: NUEVO IMPORT
 from pydantic import BaseModel
 from typing import Optional
 import uvicorn
 import os
 import holidays
-import requests # NOVO: Para chamar a API externa
+import requests
 from datetime import datetime
 
 app = FastAPI(title="FlightOnTime AI Service (V5.0 Live Weather)")
+
+# --- CONFIGURAÇÃO CORS  ---
+# Permite que qualquer origem conecte (necessário para testes de front-end)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # Aceita tudo
+    allow_credentials=True,
+    allow_methods=["*"],      # Aceita GET, POST, OPTIONS, etc.
+    allow_headers=["*"],      # Aceita todos os headers
+)
 
 # --- CARGA ROBUSTA ---
 current_dir = os.path.dirname(os.path.abspath(__file__))
